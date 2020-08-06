@@ -1,1 +1,30 @@
-HELLO WORLD
+<body>
+  <div id="grid">
+    HELLO WORLD
+  </div>
+</body>
+
+<script>
+  var grid = document.GetElementById("grid")
+  
+  function populateGrid( col, row, grid )
+  {
+    var str = "<table>";
+    
+    for( var i = 0; i < col; i++ )
+    {
+      str += "<tr>";
+      for( var j = 0; j < row; j++ )
+      {
+        str += "<td>" + i + "; " + j + "</td>";
+      }
+      str += </tr>
+    }
+    
+    str += "</table>";
+    grid.innerHtml = str;
+  }
+  
+  populateGrid(3, 3, grid);
+  
+</script>
