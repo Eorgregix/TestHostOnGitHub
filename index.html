@@ -1,6 +1,8 @@
 <style>
 table, th, td {
   border: 1px solid black;
+  width: 10vw;
+  height: 10vh;
 }
 
 th, td {
@@ -10,12 +12,12 @@ th, td {
 
 <body>
   <div id="grid">
-    HELLO WORLD
   </div>
 </body>
 
 <script>
   var grid = document.getElementById("grid")
+  var dataGrid = [];
   
   function populateGrid( col, row, grid )
   {
@@ -26,15 +28,39 @@ th, td {
       str += "<tr>";
       for( var j = 0; j < row; j++ )
       {
-        str += "<td>" + i + "; " + j + "</td>";
+        dataGrid.push(0);
+        str += "<td id=\"cell"+ (j + ( col*i ))+"\" onclick=\"toggleCell("+i+", "+j+")\"></td>";
       }
       str += "</tr>";
     }
     
     str += "</table>";
     grid.innerHTML = str;
+	updateGrid( dataGrid, grid);
+  }
+  function updateGrid( dataGrid, grid)
+  {
+		
+    for( var i = 0; i < 3; i++ )
+    {
+      for( var j = 0; j < 3; j++ )
+      {
+	   cell = document.getElementById("cell"+ (j + ( 3*i )));
+	   if( dataGrid[j + ( 3*i )] == 0 )
+		cell.style = "background-color:blue;text-align:center";
+		
+	   else
+		cell.style = "background-color:green;text-align:center";
+		
+      }
+    }
   }
   
+  function toggleCell(i, j)
+  {
+    dataGrid[j + ( 3*i )] = dataGrid[j + ( 3*i )] > 0 ? 0 : 1;
+	updateGrid( dataGrid, grid);
+  }
   populateGrid(3, 3, grid);
   
 </script>
